@@ -11,12 +11,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 _moveVector;
     private float _fallVelocity = 0;
 
-    private characterController _CharacterController;
+    private CharacterController _characterController;
 
     // Start is called before the first frame update
     void Start()
     {
-        _CharacterController = GetComponent<characterController>();
+        _characterController = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && _CharacterController.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
         {
             _fallVelocity = -jumpForce;
         }
@@ -52,14 +52,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //Movement
-        _CharacterController.Move(_moveVector * speed * Time.fixedDeltaTime);
+        _characterController.Move(_moveVector * speed * Time.fixedDeltaTime);
 
         //Fall and jump
         _fallVelocity += gravity * Time.fixedDeltaTime;
-        _CharacterController.Move(Vector3.down * _fallVelocity * Time.fixedDeltaTime);
+        _characterController.Move(Vector3.down * _fallVelocity * Time.fixedDeltaTime);
 
         //Spop fall if on the grouhd
-        if(_CharacterController.isGrounded)
+        if(_characterController.isGrounded)
         {
             _fallVelocity = 0;
         }
